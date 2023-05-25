@@ -1,0 +1,14 @@
+{
+  "tokenBot": "",
+  "ip": "",
+  "port": "",
+  "pwd": "",
+  "admins": [
+    ""
+  ],
+  "Exclude": [
+    "desktop",
+    "navmesh",
+    "frequency"
+  ]
+}
