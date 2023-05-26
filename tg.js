@@ -41,6 +41,14 @@ rcon.on('error', (err) => {
     rcon.login();
   }, 60000);
 });
+rcon.on('end', () => {
+  console.log('Соединение было потеряно!');
+  setTimeout(() => {
+    console.log('Повторное подключение...');
+    rcon.login();
+  }, 10000);
+});
+
 
 
 const messageTypes = {
