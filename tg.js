@@ -27,26 +27,28 @@ rcon.login();
 
 
 let isConnected = false;
+let connectionAttempts = 0;
 
-rcon.on('connect', () => {
+rcon.on('connected', () => {
   if (!isConnected) {
-    isConnected = true;
-    console.log('Бот подключен!');
+    isConnected = true;    
+    console.log('Подключение установлено!');
+    rcon.send('fps');
+    connectionAttempts = 0;
   }
 });
+
 rcon.on('error', (err) => {
-  console.error(`Ошибка подключения: ${err.message}.`);
-  setTimeout(() => {
-    console.log('Повторное подключение...');
-    rcon.login();
-  }, 60000);
+  // console.error(`Ошибка подключения: ${err.message}.`);
 });
-rcon.on('end', () => {
-  console.log('Соединение было потеряно!');
+
+rcon.on('disconnect', () => {
+  connectionAttempts++;
+  console.log(`Ошибка подключения! Попытка переподключения №${connectionAttempts}`);
   setTimeout(() => {
-    console.log('Повторное подключение...');
+    console.log('Повторное подключение..');
     rcon.login();
-  }, 10000);
+  }, 40000);
 });
 
 
